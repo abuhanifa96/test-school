@@ -15,7 +15,6 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
-// Allow all origins for development. For production, you might want to restrict this.
 app.use(cors());
 app.use(express.json());
 
@@ -24,6 +23,10 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/assessments", assessmentRoutes);
 app.use("/api/certifications", certificationRoutes);
 
+app.get("/api/health", (req: Request, res: Response) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.get("/", (req: Request, res: Response) => {
   res.send("API is running...");
 });
@@ -31,9 +34,6 @@ app.get("/", (req: Request, res: Response) => {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
